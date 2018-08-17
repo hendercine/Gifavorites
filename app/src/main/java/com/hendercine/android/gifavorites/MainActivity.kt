@@ -1,12 +1,9 @@
 package com.hendercine.android.gifavorites
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
+class MainActivity : BaseActivity() {
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getContentResource(): Int {
+        return R.layout.activity_main
     }
+
 }
