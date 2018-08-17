@@ -37,6 +37,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @LayoutRes
     protected abstract int getContentResource();
 
+    protected abstract void init(@Nullable Bundle state);
+
     public void showSnackBar(int resId) {
         Snackbar.make(
                 findViewById(android.R.id.content),
