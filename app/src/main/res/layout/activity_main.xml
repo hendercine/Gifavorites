@@ -15,51 +15,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <SearchView
-        android:id="@+id/search_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="top"
-        app:layout_constraintBottom_toBottomOf="@+id/top_right_cv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-    </SearchView>
-
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical_guide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="192dp"/>
-
-    <android.support.constraint.Guideline
-        android:id="@+id/mid_horizontal_guide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="279dp"/>
-
-    <android.support.constraint.Guideline
-        android:id="@+id/top_horizontal_guide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="48dp"/>
-
     <android.support.constraint.Group
         android:id="@+id/card_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:focusable="auto"
+        android:focusable="true"
         android:visibility="visible"
         app:constraint_referenced_ids="bottom_right_cv,bottom_left_cv,top_left_cv,top_right_cv"/>
 
@@ -70,14 +31,14 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/mid_horizontal_guide"
-        app:layout_constraintEnd_toStartOf="@+id/vertical_guide"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_left_cv"
+        app:layout_constraintEnd_toStartOf="@+id/top_right_cv"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_field"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/top_left_iv"
@@ -95,12 +56,13 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/mid_horizontal_guide"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_right_cv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vertical_guide"
-        app:layout_constraintTop_toTopOf="@+id/top_horizontal_guide">
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/top_left_cv"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/top_right_iv"
@@ -115,15 +77,16 @@
         android:id="@+id/bottom_left_cv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/vertical_guide"
+        app:layout_constraintEnd_toStartOf="@+id/bottom_right_cv"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mid_horizontal_guide">
+        app:layout_constraintTop_toBottomOf="@+id/top_left_cv">
 
         <ImageView
             android:id="@+id/bottom_left_iv"
@@ -138,14 +101,16 @@
         android:id="@+id/bottom_right_cv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/bottom_left_cv"
-        app:layout_constraintTop_toTopOf="@+id/mid_horizontal_guide">
+        app:layout_constraintTop_toBottomOf="@+id/top_right_cv">
 
         <ImageView
             android:id="@+id/bottom_right_iv"
