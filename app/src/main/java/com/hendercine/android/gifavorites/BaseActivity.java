@@ -12,7 +12,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,16 +27,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentResource());
+//        setContentView(getContentResource());
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
     }
 
-    @LayoutRes
-    protected abstract int getContentResource();
-
-    protected abstract void init(@Nullable Bundle state);
+//    @LayoutRes
+//    protected abstract int getContentResource();
+//
+//    protected abstract void init(@Nullable Bundle state);
 
     public void showSnackBar(int resId) {
         Snackbar.make(
