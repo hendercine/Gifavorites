@@ -3,10 +3,10 @@
  * Copyright (c) Hendercine Productions and James Henderson 2018.
  * All rights reserved.
  *
- * Last modified 8/16/18 9:39 PM
+ * Last modified 8/17/18 9:20 PM
  */
 
-package com.hendercine.android.gifavorites;
+package com.hendercine.android.gifavorites.view.base;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -16,6 +16,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import com.hendercine.android.gifavorites.BuildConfig;
 
 import timber.log.Timber;
 
