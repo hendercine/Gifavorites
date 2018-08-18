@@ -6,6 +6,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 
+    override fun getContentResource(): Int {
+        return R.layout.activity_main
+    }
+
     override fun init(state: Bundle?) {
         Glide.with(this)
                 .load(R.drawable.ic_launcher_foreground)
@@ -19,10 +23,6 @@ class MainActivity : BaseActivity() {
         Glide.with(this)
                 .load(R.drawable.ic_cloud_black_24dp)
                 .into(bottom_right_iv)
-    }
-
-    override fun getContentResource(): Int {
-        return R.layout.activity_main
     }
 
 }
