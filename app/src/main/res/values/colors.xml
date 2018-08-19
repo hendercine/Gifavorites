@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8"<!--
+<!--?xml version="1.0" encoding="UTF-8"
   ~ Created by James Henderson on 2018
   ~ Copyright (c) Hendercine Productions and James Henderson 2018.
   ~ All rights reserved.
@@ -6,7 +6,6 @@
   ~ Last modified 8/17/18 9:07 PM
   -->
 
-?-->
 <resources>
   <color name="deepPurple500">#673ab7</color>
   <color name="deepPurple900">#311b92</color>
