@@ -1,3 +1,4 @@
+
 /*
  * Created by James Henderson on 2018
  * Copyright (c) Hendercine Productions and James Henderson 2018.
@@ -15,3 +16,4 @@ data class Gif(val id: String,
                val url: String,
                val caption: String,
                val title: String)
+
