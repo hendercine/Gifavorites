@@ -11,6 +11,7 @@
 buildscript {
     ext.kotlin_version = '1.2.60'
     ext.androidSupportVersion = "27.1.1"
+    ext.retrofit2Version = "2.4.0"
     repositories {
         google()
         jcenter()
