@@ -21,9 +21,16 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            buildConfigField 'String', "ApiKey", GifavoritesApp_ApiKey
+            resValue 'string', "api_key", GifavoritesApp_ApiKey
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "ApiKey", GifavoritesApp_ApiKey
+            resValue 'string', "api_key", GifavoritesApp_ApiKey
         }
     }
 }
