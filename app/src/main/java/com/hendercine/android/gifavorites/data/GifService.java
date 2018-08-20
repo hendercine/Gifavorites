@@ -13,12 +13,14 @@ import com.hendercine.android.gifavorites.model.Gif;
 import java.util.ArrayList;
 
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import rx.Observable;
 /**
  * Gifavorites created by artemis on 8/18/18.
  */
 interface GifService {
 
-    @GET("giphy-json") Observable<ArrayList<Gif>> getGifData();
+    @GET("giphy-json")
+    Observable<ArrayList<Gif>> searchGifs(@Query("q") String query);
 
 }

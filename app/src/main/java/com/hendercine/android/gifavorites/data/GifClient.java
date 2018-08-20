@@ -8,6 +8,7 @@
 
 package com.hendercine.android.gifavorites.data;
 
+import com.hendercine.android.gifavorites.BuildConfig;
 import com.hendercine.android.gifavorites.model.Gif;
 
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class GifClient {
 
-    private static final String BASE_URL = "api.giphy.com";
+    private static final String BASE_URL = "http://api.giphy.com";
+    private static final String API_KEY = BuildConfig.ApiKey;
 
     private static GifClient instance;
     private static GifService gifService;
@@ -41,7 +43,7 @@ public class GifClient {
         return instance;
     }
 
-    public rx.Observable<ArrayList<Gif>> getGifFromJson() {
-        return gifService.getGifData();
+    public rx.Observable<ArrayList<Gif>> getGiphyJson(String query) {
+        return gifService.searchGifs(query + "&" + API_KEY);
     }
 }
