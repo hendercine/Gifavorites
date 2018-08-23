@@ -8,8 +8,6 @@
 
 package com.hendercine.android.gifavorites.data;
 
-import com.hendercine.android.gifavorites.model.Gif;
-
 import java.util.ArrayList;
 
 import retrofit2.http.GET;
