@@ -28,13 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopUpOverlay"
-            style="@style/AppTheme.AppBarTitle">
-
-            <SearchView
-                android:id="@+id/search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </android.support.v7.widget.Toolbar>
+            style="@style/AppTheme.AppBarTitle"/>
 
     </android.support.design.widget.AppBarLayout>
 

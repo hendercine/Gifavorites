@@ -8,6 +8,8 @@
 
 package com.hendercine.android.gifavorites.data;
 
+import com.hendercine.android.gifavorites.model.GifObject;
+
 import java.util.ArrayList;
 
 import retrofit2.http.GET;
@@ -19,6 +21,6 @@ import rx.Observable;
 interface GifService {
 
     @GET("giphy-json")
-    Observable<ArrayList<Gif>> searchGifs(@Query("q") String query);
+    Observable<ArrayList<GifObject>> searchGifs(@Query("q") String query);
 
 }

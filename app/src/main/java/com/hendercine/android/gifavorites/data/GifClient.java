@@ -9,6 +9,7 @@
 package com.hendercine.android.gifavorites.data;
 
 import com.hendercine.android.gifavorites.BuildConfig;
+import com.hendercine.android.gifavorites.model.GifObject;
 
 import java.util.ArrayList;
 
@@ -42,7 +43,7 @@ public class GifClient {
         return instance;
     }
 
-    public rx.Observable<ArrayList<Gif>> getGiphyJson(String query) {
+    public rx.Observable<ArrayList<GifObject>> getGiphyJson(String query) {
         return gifService.searchGifs(query + "&" + API_KEY);
     }
 }

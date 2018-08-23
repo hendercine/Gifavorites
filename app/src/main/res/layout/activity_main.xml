@@ -16,11 +16,10 @@
     tools:context=".view.mainview.MainActivity">
 
     <include
+        android:id="@+id/include"
         layout="@layout/app_bar_main"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/top_left_cv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -32,110 +31,17 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="?android:attr/actionBarSize"/>
 
-    <android.support.constraint.Group
-        android:id="@+id/card_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="visible"
-        app:constraint_referenced_ids="bottom_right_cv,bottom_left_cv,top_left_cv,top_right_cv"/>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/top_left_cv"
+    <android.support.v7.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_left_cv"
-        app:layout_constraintEnd_toStartOf="@+id/top_right_cv"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline">
-
-        <ImageView
-            android:id="@+id/top_left_iv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@android:drawable/ic_menu_report_image"/>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/top_right_cv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_right_cv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/top_left_cv"
-        app:layout_constraintTop_toTopOf="@+id/guideline">
-
-        <ImageView
-            android:id="@+id/top_right_iv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@android:drawable/ic_menu_report_image"/>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/bottom_left_cv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_right_cv"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_left_cv">
-
-        <ImageView
-            android:id="@+id/bottom_left_iv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@android:drawable/ic_menu_report_image"/>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/bottom_right_cv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottom_left_cv"
-        app:layout_constraintTop_toBottomOf="@+id/top_right_cv">
-
-        <ImageView
-            android:id="@+id/bottom_right_iv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@android:drawable/ic_menu_report_image"/>
-    </android.support.v7.widget.CardView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:listitem="@layout/list_item_main"/>
 
 </android.support.constraint.ConstraintLayout>
