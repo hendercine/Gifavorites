@@ -16,7 +16,7 @@ import org.parceler.Parcel;
  */
 
 @Parcel(Parcel.Serialization.BEAN)
-class GiphyImage {
+public class GiphyImage {
 
     @SuppressWarnings("WeakerAccess")
     @SerializedName("url")

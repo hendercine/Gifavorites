@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 
 @Parcel(Parcel.Serialization.BEAN)
-public class GifObject {
+public class GiphyObject {
 
     @SuppressWarnings("WeakerAccess")
     @SerializedName("id")
@@ -30,10 +30,13 @@ public class GifObject {
     @SerializedName("url")
     String mGifObjecturl;
     @SuppressWarnings("WeakerAccess")
+    @SerializedName("title")
+    String mGifTitle;
+    @SuppressWarnings("WeakerAccess")
     @SerializedName("images")
     ArrayList<GiphyImage> mGiphyImages;
 
-    public GifObject() {
+    public GiphyObject() {
     }
 
     public String getGifObjectId() {
@@ -58,6 +61,14 @@ public class GifObject {
 
     public void setGifObjecturl(String gifObjecturl) {
         mGifObjecturl = gifObjecturl;
+    }
+
+    public String getGifTitle() {
+        return mGifTitle;
+    }
+
+    public void setGifTitle(String gifTitle) {
+        mGifTitle = gifTitle;
     }
 
     public ArrayList<GiphyImage> getGiphyImages() {

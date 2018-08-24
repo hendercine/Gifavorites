@@ -8,7 +8,7 @@
 
 package com.hendercine.android.gifavorites.data;
 
-import com.hendercine.android.gifavorites.model.GifObject;
+import com.hendercine.android.gifavorites.model.GiphyObject;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ import rx.Observable;
 interface GifService {
 
     @GET("search")
-    Observable<ArrayList<GifObject>> searchGifs(@Query("q") String query,
-                                                @Header("api_key") String key);
+    Observable<ArrayList<GiphyObject>> searchGifs(@Query("q") String query,
+                                                  @Header("api_key") String key);
 
 }
