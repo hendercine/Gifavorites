@@ -38,9 +38,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
     // Android Support Library
     implementation "com.android.support:appcompat-v7:$androidSupportVersion"
     implementation "com.android.support:support-v4:$androidSupportVersion"
@@ -54,14 +51,22 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 
-    // Timber
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    // ButterKnife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.5'
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Parceler
+    implementation 'org.parceler:parceler-api:1.1.11'
+    annotationProcessor 'org.parceler:parceler:1.1.11'
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
@@ -72,9 +77,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
 
-    // Parceler
-    implementation 'org.parceler:parceler-api:1.1.11'
-    annotationProcessor 'org.parceler:parceler:1.1.11'
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Testing dependencies
     testImplementation 'junit:junit:4.12'
