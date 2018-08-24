@@ -8,7 +8,6 @@
 
 package com.hendercine.android.gifavorites.model;
 
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
@@ -32,7 +31,7 @@ public class GifObject {
     String mGifObjecturl;
     @SuppressWarnings("WeakerAccess")
     @SerializedName("images")
-    ArrayList<JsonObject> mGiphyImages;
+    ArrayList<GiphyImage> mGiphyImages;
 
     public GifObject() {
     }
@@ -61,11 +60,11 @@ public class GifObject {
         mGifObjecturl = gifObjecturl;
     }
 
-    public ArrayList<JsonObject> getGiphyImages() {
+    public ArrayList<GiphyImage> getGiphyImages() {
         return mGiphyImages;
     }
 
-    public void setGiphyImages(ArrayList<JsonObject> giphyImages) {
+    public void setGiphyImages(ArrayList<GiphyImage> giphyImages) {
         mGiphyImages = giphyImages;
     }
 }
