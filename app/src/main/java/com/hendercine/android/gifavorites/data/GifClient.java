@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class GifClient {
 
-    private static final String BASE_URL = "http://api.giphy.com";
+    private static final String BASE_URL = "http://api.giphy.com/v1/gifs/";
     private static final String API_KEY = BuildConfig.ApiKey;
 
     private static GifClient instance;
@@ -44,6 +44,6 @@ public class GifClient {
     }
 
     public rx.Observable<ArrayList<GifObject>> getGiphyJson(String query) {
-        return gifService.searchGifs(query + "&" + API_KEY);
+        return gifService.searchGifs(query + "&", API_KEY);
     }
 }
