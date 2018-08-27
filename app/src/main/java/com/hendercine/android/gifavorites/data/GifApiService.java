@@ -10,20 +10,18 @@ package com.hendercine.android.gifavorites.data;
 
 import com.hendercine.android.gifavorites.model.GiphyObject;
 
-import java.util.ArrayList;
-
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Query;
 import rx.Observable;
 /**
  * Gifavorites created by artemis on 8/18/18.
  */
-interface GifService {
+interface GifApiService {
 
-    @GET("/")
-    Observable<ArrayList<GiphyObject>> searchGifs(@Query("search") String search,
-                                                  @Query("q") String query,
-                                                  @Header("api_key") String key);
+    @GET("gifs/search")
+    Observable<GiphyObject> queryGiphy(@Query("q") String query,
+                                                  @Query("offset") int offset);
 
+    @GET("gifs/trending")
+    Observable<GiphyObject> getTrending(@Query("offset") int offset);
 }
