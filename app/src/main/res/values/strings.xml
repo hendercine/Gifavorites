@@ -6,4 +6,6 @@
     <string name="network_is_connected">Device is Connected</string>
     <string name="no_network_msg">No network available, please check your WiFi or Data connection.</string>
     <string name="search_hint">Search Giphy</string>
+    <string name="done_text">DONE</string>
+    <string name="search_btn_text">SEARCH</string>
 </resources>
