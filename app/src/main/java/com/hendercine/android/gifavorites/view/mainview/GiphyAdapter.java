@@ -15,6 +15,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -27,7 +28,7 @@ import static android.support.v7.widget.RecyclerView.ViewHolder;
 /**
  * Gifavorites created by artemis on 8/23/18.
  */
-public class GiphyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GiphyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     LayoutInflater mInflater;
     Listener mListener;
@@ -35,9 +36,7 @@ public class GiphyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private Context mContext;
 
     interface Listener {
-
         void onSelected(String url);
-
     }
 
     GiphyAdapter(@NonNull Context context) {
@@ -129,85 +128,5 @@ public class GiphyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     void setListener(Listener listener) {
         this.mListener = listener;
     }
-
-    //    @NonNull
-//    @Override
-//    public MainGridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
-//                .list_item_main, parent, false);
-//        return new MainGridViewHolder(view);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull MainGridViewHolder holder, int position) {
-//
-//            mContext = holder.mCardView.getContext();
-//    loadGif(gif, holder.mImageView);
-//            mContext.
-//
-//        }
-////
-////    @Override
-////    public int getItemCount() {
-////        return null;
-////    }
-////
-////    public long getItemId(int position) {
-////        return position;
-////    }
-//
-////    private Gif getItem(int position) {
-////        if (position < 0 || position >= mGifs.size()) {
-////            return null;
-////        } else {
-////            return mGifs.get(position);
-////        }
-////    }
-//
-////    public void setList(ArrayList<Gif> giphyObjects) {
-////        if (mList == null) {
-////            return;
-////        }
-////        mGifs.clear();
-////        mGifs.addAll(giphyObjects);
-////        notifyDataSetChanged();
-//    }
-//
-//    private void setListener(Listener listener) {
-//        this.mListener = listener;
-//    }
-//
-//
-//    class MainGridViewHolder extends ViewHolder {
-//
-//        @BindView(R.id.main_grid_card_view)
-//        CardView mCardView;
-//        @BindView(R.id.main_grid_item_img)
-//        ImageView mImageView;
-//
-//        @BindView(R.id.main_grid_item_title)
-//        TextView mTitleView;
-//        public MainGridViewHolder(View itemView) {
-//            super(itemView);
-//            ButterKnife.bind(this, itemView);
-//        }
-//
-//    }
-//    //
-//    //        void onItemCLick(View view, int position);
-//    //
-//    //    public interface ItemClickListener {
-//    //
-//    //    }
-//    //        this.mClickListener = itemClickListener;
-////    public void setClickListener(ItemClickListener itemClickListener) {
-//
-////    }
-//
-//
-//    @Override
-//    public int getItemCount() {
-//        return 0;
-//    }
 
 }
