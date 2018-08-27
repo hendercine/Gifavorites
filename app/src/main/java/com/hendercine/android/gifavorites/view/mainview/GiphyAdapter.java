@@ -20,8 +20,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hendercine.android.gifavorites.R;
+import com.hendercine.android.gifavorites.model.Gif;
 import com.hendercine.android.gifavorites.model.GiphyObject;
-import com.hendercine.android.gifavorites.model.GiphyImage;
 
 import java.util.ArrayList;
 
@@ -31,40 +31,52 @@ import butterknife.ButterKnife;
 /**
  * Gifavorites created by artemis on 8/23/18.
  */
-public class MainGridRecyclerAdapter extends RecyclerView
-                                                     .Adapter<MainGridRecyclerAdapter.MainGridViewHolder> {
+public class GiphyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private ArrayList<GiphyObject> mList;
-    private ArrayList<GiphyImage> mGiphyImages;
-    private ItemClickListener mClickListener;
+    LayoutInflater mInflater;
+    Listener mListener;
+    GiphyObject mResponse;
 
-    private int focusedItem = RecyclerView.NO_POSITION;
-    private GiphyObject giphyObject;
-    private GiphyImage giphyImage;
+//    private ArrayList<GiphyObject> mList;
+//    private ArrayList<Gif> mGifs;
+//    private ItemClickListener mClickListener;
 
-    public MainGridRecyclerAdapter(ArrayList<GiphyObject> giphyObjects, ArrayList<GiphyImage> giphyImages) {
-        this.mList = giphyObjects;
-        this.mGiphyImages = giphyImages;
+//    private int focusedItem = RecyclerView.NO_POSITION;
+//    private GiphyObject giphyObject;
+//    private Gif mGif;
+
+    interface Listener {
+
+        void onSelected(String url);
+    }
+
+    public GiphyAdapter(@NonNull Context context) {
+        this.mInflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
-    public MainGridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
                 .list_item_main, parent, false);
         return new MainGridViewHolder(view);
     }
 
     @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull MainGridViewHolder holder, int position) {
         Context context = holder.mCardView.getContext();
         giphyObject = mList.get(position);
-        giphyImage = getItem(position);
+        mGif = getItem(position);
         holder.itemView.setSelected(focusedItem == position);
         holder.mTitleView.setText(giphyObject.getGifTitle());
-        if (giphyImage != null && !giphyImage.getImageUrl().isEmpty()) {
+        if (mGif != null && !mGif.getImageUrl().isEmpty()) {
             Glide.with(context)
-                    .load(giphyImage.getImageUrl())
+                    .load(mGif.getImageUrl())
                     .into(holder.mImageView);
         } else {
             holder.mImageView.setImageResource(R.mipmap.ic_launcher);
@@ -80,20 +92,20 @@ public class MainGridRecyclerAdapter extends RecyclerView
         return position;
     }
 
-    private GiphyImage getItem(int position) {
-        if (position < 0 || position >= mGiphyImages.size()) {
+    private Gif getItem(int position) {
+        if (position < 0 || position >= mGifs.size()) {
             return null;
         } else {
-            return mGiphyImages.get(position);
+            return mGifs.get(position);
         }
     }
 
-    public void setList(ArrayList<GiphyImage> giphyObjects) {
+    public void setList(ArrayList<Gif> giphyObjects) {
         if (mList == null) {
             return;
         }
-        mGiphyImages.clear();
-        mGiphyImages.addAll(giphyObjects);
+        mGifs.clear();
+        mGifs.addAll(giphyObjects);
         notifyDataSetChanged();
     }
 
