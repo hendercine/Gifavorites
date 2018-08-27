@@ -8,11 +8,9 @@
 
 package com.hendercine.android.gifavorites.data;
 
-import com.hendercine.android.gifavorites.BuildConfig;
 import com.hendercine.android.gifavorites.model.GiphyObject;
 
-import java.util.ArrayList;
-
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -21,29 +19,34 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class GifClient {
 
-    private static final String BASE_URL = "http://api.giphy.com/v1/gifs/";
-    private static final String API_KEY = BuildConfig.ApiKey;
+    private static final String BASE_URL = "http://api.giphy.com/v1/";
+    private static GifApiService mGifApiService;
+    private Retrofit mRetrofit;
 
-    private static GifClient instance;
-    private static GifService gifService;
+    public GifClient(String apiKey) {
+        this.mRetrofit = getRetrofit(apiKey);
+        this.mGifApiService = mRetrofit.create(GifApiService.class);
 
-    private GifClient() {
-        final Retrofit retrofit = new Retrofit.Builder()
+    }
+
+    private Retrofit getRetrofit(String apiKey) {
+        return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(getHttpClient(apiKey))
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-        gifService = retrofit.create(GifService.class);
     }
 
-    public static GifClient getInstance() {
-        if (instance == null) {
-            instance = new GifClient();
-        }
-        return instance;
+    private OkHttpClient getHttpClient(String apiKey) {
+        return new OkHttpClient.Builder().addInterceptor(new GiphyInterceptor(apiKey)).build();
     }
 
-    public rx.Observable<ArrayList<GiphyObject>> getGiphyJson(String query) {
-        return gifService.searchGifs("search",query + "&", API_KEY);
+    public rx.Observable<GiphyObject> getTrendingGifs(int offset) {
+        return mGifApiService.getTrending(offset);
+    }
+
+    public rx.Observable<GiphyObject> getSearchQuery(String query, int offset) {
+        return mGifApiService.queryGiphy(query, offset);
     }
 }
