@@ -18,7 +18,7 @@ import android.support.annotation.Nullable;
 public class GiphyService extends IntentService {
 
     GifClient mGifClient;
-    GifService mGifService;
+    GifApiService mGifApiService;
 
     public GiphyService() {
         super(GiphyService.class.getSimpleName());
