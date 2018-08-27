@@ -11,15 +11,18 @@ package com.hendercine.android.gifavorites.view.mainview;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
+import com.hendercine.android.gifavorites.BuildConfig;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Gifavorites created by artemis on 8/27/18.
  */
-public class GiphyUtils extends AppCompatActivity {
+public class GiphyUtils {
 
     public final static String GIPHY_URL = "giphy_url";
-    public final static String API_KEY = "api_key";
+    public final static String API_KEY = BuildConfig.ApiKey;
     public final static int REQUEST_CODE = 1001;
     public final static int PAGE_COUNT = 25;
 
