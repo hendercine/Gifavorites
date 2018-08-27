@@ -8,57 +8,34 @@
 
 package com.hendercine.android.gifavorites.model;
 
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.SerializedName;
-
-import org.parceler.Parcel;
 /**
  * Gifavorites created by artemis on 8/23/18.
  */
 
-@Parcel(Parcel.Serialization.BEAN)
-public class GiphyImage {
+public class Gif {
 
-    @SuppressWarnings("WeakerAccess")
-    @SerializedName("url")
-    String mImageUrl;
-    @SuppressWarnings("WeakerAccess")
-    @SerializedName("width")
-    String mImageWidth;
-    @SuppressWarnings("WeakerAccess")
-    @SerializedName("height")
-    String mImageHeight;
+    public static class ImageContainer {
 
-    public GiphyImage() {
+        public String url;
+        public String width;
+        public String height;
     }
 
-    public String getImageUrl() {
-        return mImageUrl;
+    public static class GiphyImage {
+
+        public ImageContainer fixed_width;
+        public ImageContainer fixed_width_small;
     }
 
-    public void setImageUrl(String imageUrl) {
-        mImageUrl = imageUrl;
+    public GiphyImage images;
+
+    public String getUrl() {
+        return images.fixed_width.url;
     }
 
-    public String getImageWidth() {
-        return mImageWidth;
+    public String getUrlSmall() {
+        return images.fixed_width_small.url;
     }
 
-    public void setImageWidth(String imageWidth) {
-        mImageWidth = imageWidth;
-    }
-
-    public String getImageHeight() {
-        return mImageHeight;
-    }
-
-    public void setImageHeight(String imageHeight) {
-        mImageHeight = imageHeight;
-    }
-
-    public static TypeAdapter<GiphyImage> typeAdapter(Gson gson) {
-        return null;
-    }
 }
 

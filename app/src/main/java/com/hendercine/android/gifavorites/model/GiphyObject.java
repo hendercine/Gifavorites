@@ -10,70 +10,27 @@ package com.hendercine.android.gifavorites.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.parceler.Parcel;
+import java.util.ArrayList;
 /**
  * Gifavorites created by artemis on 8/22/18.
  */
 
-@Parcel(Parcel.Serialization.BEAN)
+
 public class GiphyObject {
 
     @SuppressWarnings("WeakerAccess")
-    @SerializedName("id")
-    String mGifObjectId;
-    @SuppressWarnings("WeakerAccess")
-    @SerializedName("slug")
-    String mGifObjectSlug;
-    @SuppressWarnings("WeakerAccess")
-    @SerializedName("url")
-    String mGifObjecturl;
-    @SuppressWarnings("WeakerAccess")
-    @SerializedName("title")
-    String mGifTitle;
-    @SuppressWarnings("WeakerAccess")
-    @SerializedName("images")
-    GiphyImage mGiphyImageObject;
+    @SerializedName("data")
+    ArrayList<Gif> mGifs;
 
-    public GiphyObject() {
+    public ArrayList<Gif> getGifs() {
+        return mGifs;
     }
 
-    public String getGifObjectId() {
-        return mGifObjectId;
+    public Gif getImagesData(int pos) {
+        return mGifs.get(pos);
     }
 
-    public void setGifObjectId(String gifObjectId) {
-        mGifObjectId = gifObjectId;
-    }
-
-    public String getGifObjectSlug() {
-        return mGifObjectSlug;
-    }
-
-    public void setGifObjectSlug(String gifObjectSlug) {
-        mGifObjectSlug = gifObjectSlug;
-    }
-
-    public String getGifObjecturl() {
-        return mGifObjecturl;
-    }
-
-    public void setGifObjecturl(String gifObjecturl) {
-        mGifObjecturl = gifObjecturl;
-    }
-
-    public String getGifTitle() {
-        return mGifTitle;
-    }
-
-    public void setGifTitle(String gifTitle) {
-        mGifTitle = gifTitle;
-    }
-
-    public GiphyImage getGiphyImageObject() {
-        return mGiphyImageObject;
-    }
-
-    public void setGiphyImageObject(GiphyImage giphyImageObject) {
-        mGiphyImageObject = giphyImageObject;
+    public void appendImagesData(ArrayList<Gif> data) {
+        this.mGifs.addAll(data);
     }
 }
