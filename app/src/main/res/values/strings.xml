@@ -5,4 +5,5 @@
     <string name="giphy_title_ph">Giphy Title</string>
     <string name="network_is_connected">Device is Connected</string>
     <string name="no_network_msg">No network available, please check your WiFi or Data connection.</string>
+    <string name="search_hint">Search Giphy</string>
 </resources>
