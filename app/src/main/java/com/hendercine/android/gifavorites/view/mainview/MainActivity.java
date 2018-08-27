@@ -8,6 +8,7 @@
 
 package com.hendercine.android.gifavorites.view.mainview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -16,11 +17,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
+import com.hendercine.android.gifavorites.BuildConfig;
 import com.hendercine.android.gifavorites.R;
 import com.hendercine.android.gifavorites.data.GifClient;
 import com.hendercine.android.gifavorites.model.Gif;
@@ -47,6 +52,13 @@ import timber.log.Timber;
  */
 public class MainActivity extends BaseActivity implements GiphyAdapter.Listener {
 
+    public final static String GIPHY_URL = "giphy_url";
+    public final static String API_KEY = BuildConfig.ApiKey;
+    public final static int REQUEST_CODE = 1001;
+    public final static int PAGE_COUNT = 25;
+
+    public Listener mListener;
+
     @Nullable
     @BindView(R.id.main_grid_recycler)
     RecyclerView mHandHeldGridCards;
@@ -57,6 +69,10 @@ public class MainActivity extends BaseActivity implements GiphyAdapter.Listener 
 
     @BindView(R.id.search_field_view)
     AppCompatEditText mEditText;
+
+    @BindView(R.id.search_btn)
+    Button mSearchButton;
+
     RecyclerView mRecyclerView;
 
     GiphyAdapter mAdapter;
@@ -97,7 +113,7 @@ public class MainActivity extends BaseActivity implements GiphyAdapter.Listener 
             // Adapter Mods
             if (loadMore) {
                 mAdapter.appendResponse(giphyObject);
-                offset += GiphyUtils.PAGE_COUNT;
+                offset += PAGE_COUNT;
             } else {
                 mAdapter.setResponse(giphyObject);
                 offset = 0;
@@ -119,7 +135,7 @@ public class MainActivity extends BaseActivity implements GiphyAdapter.Listener 
         Timber.d("In onCreate");
 
         mCacheExecutor = Executors.newFixedThreadPool(1);
-        mGifClient = new GifClient(getIntent().getStringExtra(GiphyUtils.API_KEY));
+        mGifClient = new GifClient(getIntent().getStringExtra(API_KEY));
         mConnectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         boolean isTablet = getResources().getBoolean(R.bool.isTablet);
 
@@ -157,14 +173,19 @@ public class MainActivity extends BaseActivity implements GiphyAdapter.Listener 
                 }
             }
         });
-//        mRecyclerView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                dismissKeyboard();
-//                return false;
-//
-//            }
-//        });
+        mRecyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismissKeyboard();
+            }
+        });
+
+        mSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start(MainActivity.this, mListener, API_KEY);
+            }
+        });
 
         setUpEditText();
         getTrending(offset);
@@ -207,10 +228,36 @@ public class MainActivity extends BaseActivity implements GiphyAdapter.Listener 
         }
     }
 
+    public void start(Activity activity, Listener listener, String apiKey) {
+        this.mListener = listener;
+        activity.startActivityForResult(buildIntent(activity, apiKey), REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE:
+                    if (mListener != null) {
+                        mListener.onGiphySeleted(data.getStringExtra
+                                (GIPHY_URL));
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private Intent buildIntent(Context context, String apiKey) {
+        Intent intent =  new Intent(context, MainActivity.class);
+        intent.putExtra(API_KEY, apiKey);
+        return intent;
+    }
+
     @Override
     public void onSelected(String url) {
         Intent intent = new Intent();
-        intent.putExtra(GiphyUtils.GIPHY_URL, url);
+        intent.putExtra(GIPHY_URL, url);
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -243,10 +290,10 @@ public class MainActivity extends BaseActivity implements GiphyAdapter.Listener 
         return getApplicationContext();
     }
 
-//    private void dismissKeyboard() {
-//        InputMethodManager inm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//        inm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
-//    }
+    private void dismissKeyboard() {
+        InputMethodManager inm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+    }
 
     private void loadMore() {
         loadMore = true;
@@ -288,5 +335,10 @@ public class MainActivity extends BaseActivity implements GiphyAdapter.Listener 
                             .centerCrop())
                     .transition(DrawableTransitionOptions.withCrossFade());
         }
+    }
+
+    public interface Listener {
+
+        void onGiphySeleted(String url);
     }
 }
