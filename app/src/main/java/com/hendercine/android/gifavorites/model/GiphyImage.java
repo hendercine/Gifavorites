@@ -8,6 +8,8 @@
 
 package com.hendercine.android.gifavorites.model;
 
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
@@ -53,6 +55,10 @@ public class GiphyImage {
 
     public void setImageHeight(String imageHeight) {
         mImageHeight = imageHeight;
+    }
+
+    public static TypeAdapter<GiphyImage> typeAdapter(Gson gson) {
+        return null;
     }
 }
 

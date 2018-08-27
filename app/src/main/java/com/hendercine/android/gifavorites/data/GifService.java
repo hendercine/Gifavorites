@@ -21,8 +21,9 @@ import rx.Observable;
  */
 interface GifService {
 
-    @GET("search")
-    Observable<ArrayList<GiphyObject>> searchGifs(@Query("q") String query,
+    @GET("data")
+    Observable<ArrayList<GiphyObject>> searchGifs(@Query("search") String search,
+                                                  @Query("q") String query,
                                                   @Header("api_key") String key);
 
 }

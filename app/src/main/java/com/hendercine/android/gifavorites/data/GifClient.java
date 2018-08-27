@@ -44,6 +44,6 @@ public class GifClient {
     }
 
     public rx.Observable<ArrayList<GiphyObject>> getGiphyJson(String query) {
-        return gifService.searchGifs(query + "&", API_KEY);
+        return gifService.searchGifs("search",query + "&", API_KEY);
     }
 }

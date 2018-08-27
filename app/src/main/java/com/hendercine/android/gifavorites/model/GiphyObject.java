@@ -11,8 +11,6 @@ package com.hendercine.android.gifavorites.model;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
-
-import java.util.ArrayList;
 /**
  * Gifavorites created by artemis on 8/22/18.
  */
@@ -34,7 +32,7 @@ public class GiphyObject {
     String mGifTitle;
     @SuppressWarnings("WeakerAccess")
     @SerializedName("images")
-    ArrayList<GiphyImage> mGiphyImages;
+    GiphyImage mGiphyImageObject;
 
     public GiphyObject() {
     }
@@ -71,11 +69,11 @@ public class GiphyObject {
         mGifTitle = gifTitle;
     }
 
-    public ArrayList<GiphyImage> getGiphyImages() {
-        return mGiphyImages;
+    public GiphyImage getGiphyImageObject() {
+        return mGiphyImageObject;
     }
 
-    public void setGiphyImages(ArrayList<GiphyImage> giphyImages) {
-        mGiphyImages = giphyImages;
+    public void setGiphyImageObject(GiphyImage giphyImageObject) {
+        mGiphyImageObject = giphyImageObject;
     }
 }
