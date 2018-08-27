@@ -31,17 +31,19 @@ import butterknife.ButterKnife;
 /**
  * Gifavorites created by artemis on 8/23/18.
  */
-public class MainGridRecyclerAdapter extends RecyclerView.Adapter
-                                                      <MainGridRecyclerAdapter.MainGridViewHolder>{
+public class MainGridRecyclerAdapter extends RecyclerView
+                                                     .Adapter<MainGridRecyclerAdapter.MainGridViewHolder> {
 
     private ArrayList<GiphyObject> mList;
     private ArrayList<GiphyImage> mGiphyImages;
     private ItemClickListener mClickListener;
+
     private int focusedItem = RecyclerView.NO_POSITION;
     private GiphyObject giphyObject;
     private GiphyImage giphyImage;
 
-    public MainGridRecyclerAdapter(ArrayList<GiphyImage> giphyImages) {
+    public MainGridRecyclerAdapter(ArrayList<GiphyObject> giphyObjects, ArrayList<GiphyImage> giphyImages) {
+        this.mList = giphyObjects;
         this.mGiphyImages = giphyImages;
     }
 
@@ -86,25 +88,25 @@ public class MainGridRecyclerAdapter extends RecyclerView.Adapter
         }
     }
 
-    public void setList(ArrayList<GiphyObject> giphyObjects) {
+    public void setList(ArrayList<GiphyImage> giphyObjects) {
         if (mList == null) {
             return;
         }
-        mList.clear();
-        mList.addAll(giphyObjects);
+        mGiphyImages.clear();
+        mGiphyImages.addAll(giphyObjects);
         notifyDataSetChanged();
     }
 
-    public class MainGridViewHolder extends RecyclerView.ViewHolder
+    class MainGridViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         @BindView(R.id.main_grid_card_view)
         CardView mCardView;
+
         @BindView(R.id.main_grid_item_img)
         ImageView mImageView;
         @BindView(R.id.main_grid_item_title)
         TextView mTitleView;
-
         public MainGridViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -118,6 +120,10 @@ public class MainGridRecyclerAdapter extends RecyclerView.Adapter
             }
 
         }
+    }
+
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
     }
 
     public interface ItemClickListener {

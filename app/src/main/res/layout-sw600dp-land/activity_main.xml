@@ -32,7 +32,7 @@
         app:layout_constraintGuide_begin="?android:attr/actionBarSize"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/main_grid_recycler"
+        android:id="@+id/tablet_grid_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"

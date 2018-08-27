@@ -3,4 +3,6 @@
     <string name="menu_search_title">Search</string>
     <string name="giphy_image_desc_ph">Giphy Image</string>
     <string name="giphy_title_ph">Giphy Title</string>
+    <string name="network_is_connected">Device is Connected</string>
+    <string name="no_network_msg">No network available, please check your WiFi or Data connection.</string>
 </resources>
