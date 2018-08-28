@@ -27,6 +27,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.hendercine.android.gifavorites.BuildConfig;
 import com.hendercine.android.gifavorites.R;
+import com.hendercine.android.gifavorites.data.ApiResultReceiver;
 import com.hendercine.android.gifavorites.data.GifClient;
 import com.hendercine.android.gifavorites.model.Gif;
 import com.hendercine.android.gifavorites.model.GiphyObject;
@@ -50,7 +51,7 @@ import timber.log.Timber;
 /**
  * Gifavorites created by artemis on 8/22/18.
  */
-public class MainActivity extends BaseActivity implements GiphyAdapter.Listener {
+public class MainActivity extends BaseActivity implements ApiResultReceiver.Listener {
 
     public final static String GIPHY_URL = "giphy_url";
     public final static String API_KEY = BuildConfig.ApiKey;
@@ -234,18 +235,18 @@ public class MainActivity extends BaseActivity implements GiphyAdapter.Listener 
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case REQUEST_CODE:
-                    if (mListener != null) {
-                        mListener.onGiphySeleted(data.getStringExtra
-                                (GIPHY_URL));
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
+//        if (resultCode == RESULT_OK) {
+//            switch (requestCode) {
+//                case REQUEST_CODE:
+//                    if (mListener != null) {
+//                        mListener.onGiphySeleted(data.getStringExtra
+//                                (GIPHY_URL));
+//                    }
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
     }
 
     private Intent buildIntent(Context context, String apiKey) {
@@ -335,6 +336,11 @@ public class MainActivity extends BaseActivity implements GiphyAdapter.Listener 
                             .centerCrop())
                     .transition(DrawableTransitionOptions.withCrossFade());
         }
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+
     }
 
     public interface Listener {
