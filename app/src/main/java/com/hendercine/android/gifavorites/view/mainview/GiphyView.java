@@ -25,10 +25,10 @@ import com.hendercine.android.gifavorites.model.Gif;
  */
 public final class GiphyView extends RecyclerView.ViewHolder {
 
-    Context mContext;
-    AppCompatImageView mImageView;
+    private Context mContext;
+    private AppCompatImageView mImageView;
 
-    public GiphyView(View itemView) {
+    GiphyView(View itemView) {
         super(itemView);
 
         mContext = itemView.getContext();
@@ -41,8 +41,8 @@ public final class GiphyView extends RecyclerView.ViewHolder {
                 .load(gif.getUrl())
                 .apply(new RequestOptions()
                         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                        .placeholder(R.drawable.ic_audiotrack_black_24dp)
-                        .error(R.drawable.ic_casino_black_24dp)
+                        .placeholder(R.drawable.ic_placeholder)
+                        .error(R.drawable.ic_error)
                         .centerCrop())
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(mImageView);
