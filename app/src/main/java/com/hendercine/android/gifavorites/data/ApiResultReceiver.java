@@ -12,20 +12,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 
-import com.hendercine.android.gifavorites.BuildConfig;
-
-import static android.app.Activity.RESULT_OK;
-
 /**
  * Gifavorites created by artemis on 8/28/18.
  */
 public class ApiResultReceiver extends ResultReceiver {
 
-    public final static String GIPHY_URL = "giphy_url";
-    public final static String API_KEY = BuildConfig.ApiKey;
-    public final static int REQUEST_CODE = 1001;
-    public final static int PAGE_COUNT = 25;
-    private Listener mListener;
+    private ResultListener mResultListener;
 
     /**
      * Create a new ResultReceive to receive results.  Your
@@ -38,16 +30,18 @@ public class ApiResultReceiver extends ResultReceiver {
         super(handler);
     }
 
+    public void setResultListener(ResultListener resultListener) {
+        mResultListener = resultListener;
+    }
+
     @Override
     protected void onReceiveResult(int resultCode, Bundle resultData) {
-        if (resultCode == RESULT_OK) {
-                    if (mListener != null) {
-                        mListener.onReceiveResult(resultCode, resultData);
-                    }
-            }
+        if (mResultListener != null) {
+            mResultListener.onReceiveResult(resultCode, resultData);
         }
+    }
 
-    public interface Listener {
+    public interface ResultListener {
 
         void onReceiveResult(int resultCode, Bundle resultData);
 
