@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.GridLayoutManager;
@@ -48,17 +49,20 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 
+import static com.hendercine.android.gifavorites.data.ApiResultReceiver.ResultListener;
+
 /**
  * Gifavorites created by artemis on 8/22/18.
  */
-public class MainActivity extends BaseActivity implements ApiResultReceiver.Listener {
+public class MainActivity extends BaseActivity implements ResultListener, GiphyAdapter.Listener{
 
     public final static String GIPHY_URL = "giphy_url";
     public final static String API_KEY = BuildConfig.ApiKey;
     public final static int REQUEST_CODE = 1001;
     public final static int PAGE_COUNT = 25;
+    private static final String REC = "rec";
 
-    public Listener mListener;
+    public ResultListener mResultListener;
 
     @Nullable
     @BindView(R.id.main_grid_recycler)
@@ -142,13 +146,12 @@ public class MainActivity extends BaseActivity implements ApiResultReceiver.List
 
         mRecyclerView = mHandHeldGridCards;
 
-//        if (isTablet) {
-//            mRecyclerView = mTabletGridCards;
-//        }
+        if (isTablet) {
+            mRecyclerView = mTabletGridCards;
+        }
 
         mAdapter = new GiphyAdapter(getApplicationContext());
         mAdapter.setListener(this);
-
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager
@@ -184,7 +187,7 @@ public class MainActivity extends BaseActivity implements ApiResultReceiver.List
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                start(MainActivity.this, mListener, API_KEY);
+                start(MainActivity.this, mResultListener, API_KEY);
             }
         });
 
@@ -210,6 +213,7 @@ public class MainActivity extends BaseActivity implements ApiResultReceiver.List
                                 }
                             }
                         }));
+        dismissKeyboard();
     }
 
     @Override
@@ -229,38 +233,48 @@ public class MainActivity extends BaseActivity implements ApiResultReceiver.List
         }
     }
 
-    public void start(Activity activity, Listener listener, String apiKey) {
-        this.mListener = listener;
-        activity.startActivityForResult(buildIntent(activity, apiKey), REQUEST_CODE);
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (resultCode == RESULT_OK) {
-//            switch (requestCode) {
-//                case REQUEST_CODE:
-//                    if (mListener != null) {
-//                        mListener.onGiphySeleted(data.getStringExtra
-//                                (GIPHY_URL));
-//                    }
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-    }
-
-    private Intent buildIntent(Context context, String apiKey) {
-        Intent intent =  new Intent(context, MainActivity.class);
-        intent.putExtra(API_KEY, apiKey);
-        return intent;
-    }
-
     @Override
     public void onSelected(String url) {
         Intent intent = new Intent();
         intent.putExtra(GIPHY_URL, url);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        start(MainActivity.this, mResultListener, API_KEY);
+    }
+
+    public void start(Activity activity, ResultListener resultListener, String apiKey) {
+        this.mResultListener = resultListener;
+        activity.startActivityForResult(buildIntent(activity, apiKey), REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE:
+                    if (mResultListener != null) {
+                        Bundle bundle = data.getExtras();
+                        if (bundle != null) {
+                            mResultListener.onReceiveResult(resultCode, bundle.getBundle(GIPHY_URL));
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private Intent buildIntent(Context context, String apiKey) {
+        Intent intent =  new Intent(context, MainActivity.class);
+        ApiResultReceiver receiver = new ApiResultReceiver(new Handler());
+        receiver.setResultListener(this);
+        intent.putExtra(REC, receiver);
+        intent.putExtra(API_KEY, apiKey);
+        return intent;
     }
 
     private void setUpEditText() {
@@ -338,13 +352,4 @@ public class MainActivity extends BaseActivity implements ApiResultReceiver.List
         }
     }
 
-    @Override
-    public void onReceiveResult(int resultCode, Bundle resultData) {
-
-    }
-
-    public interface Listener {
-
-        void onGiphySeleted(String url);
-    }
 }

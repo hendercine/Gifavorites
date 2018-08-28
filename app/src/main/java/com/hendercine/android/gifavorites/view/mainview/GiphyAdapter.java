@@ -8,15 +8,10 @@
 
 package com.hendercine.android.gifavorites.view.mainview;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.hendercine.android.gifavorites.R;
@@ -59,53 +54,6 @@ public class GiphyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
             final GiphyView view = (GiphyView) holder;
             view.loadGif(gif);
-            view.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ObjectAnimator shrinkY = ObjectAnimator.ofFloat(view,
-                            "y", 50f, 100f
-                    ).setDuration(100);
-                    Animator shrinkX = ObjectAnimator.ofFloat(view,
-                            "x", 1.0f, 0.9f
-                    ).setDuration(100);
-                    Animator growY = ObjectAnimator.ofFloat(view,
-                            "scaleY", 0.9f, 1.0f
-                    ).setDuration(100);
-                    Animator growX = ObjectAnimator.ofFloat(view,
-                            "scaleX", 0.9f, 1.0f
-                    ).setDuration(100);
-
-                    AnimatorSet set = new AnimatorSet();
-                    set.play(shrinkX);
-                    set.play(shrinkY);
-                    set.play(growX).after(shrinkX);
-                    set.play(growY).after(shrinkY);
-                    set.addListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            if (mListener != null) {
-                                mListener.onSelected(gif.getUrl());
-                            }
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-
-                        }
-                    });
-                    set.start();
-                }
-            });
         }
     }
 
