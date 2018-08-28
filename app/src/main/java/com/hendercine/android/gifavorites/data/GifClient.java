@@ -8,6 +8,7 @@
 
 package com.hendercine.android.gifavorites.data;
 
+import com.hendercine.android.gifavorites.BuildConfig;
 import com.hendercine.android.gifavorites.model.GiphyObject;
 
 import okhttp3.OkHttpClient;
@@ -19,19 +20,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class GifClient {
 
+    private final static String API_KEY = BuildConfig.ApiKey;
     private static final String BASE_URL = "http://api.giphy.com/v1/";
     private static GifApiService mGifApiService;
 
     public GifClient(String apiKey) {
-        Retrofit retrofit = getRetrofit(apiKey);
+        Retrofit retrofit = getRetrofit();
         mGifApiService = retrofit.create(GifApiService.class);
 
     }
 
-    private Retrofit getRetrofit(String apiKey) {
+    private Retrofit getRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(getHttpClient(apiKey))
+                .client(getHttpClient(API_KEY))
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
