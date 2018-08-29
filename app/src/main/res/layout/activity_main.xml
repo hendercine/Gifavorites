@@ -13,6 +13,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/AppTheme.NoActionBar"
     tools:context=".view.mainview.MainActivity"
     tools:layout_editor_absoluteY="25dp">
 
@@ -57,11 +58,12 @@
                 android:ems="10"
                 android:focusableInTouchMode="true"
                 android:hint="@string/search_hint"
+                android:textColorHint="@color/white"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:isScrollContainer="false"
                 android:longClickable="true"
-                android:textColor="@color/deepPurple900"
+                android:textColor="@color/white"
                 android:textCursorDrawable="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
