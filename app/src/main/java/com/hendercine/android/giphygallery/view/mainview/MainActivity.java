@@ -65,6 +65,7 @@ public class MainActivity extends BaseActivity implements ResultListener {
     private static final String QUERY_KEY = "query";
 
     private String mQuery;
+    private GridLayoutManager mGridLayoutManager;
     public ResultListener mResultListener;
 
     @Nullable
@@ -143,9 +144,9 @@ public class MainActivity extends BaseActivity implements ResultListener {
 
         mToolbar.setTitle(R.string.app_name);
 
+        mConnectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         mCacheExecutor = Executors.newFixedThreadPool(1);
         mGifClient = new GifClient();
-        mConnectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         boolean isTablet = getResources().getBoolean(R.bool.isTablet);
         int spanCount;
 
@@ -158,10 +159,11 @@ public class MainActivity extends BaseActivity implements ResultListener {
         }
 
         mAdapter = new GiphyAdapter(getApplicationContext());
+        mGridLayoutManager = new GridLayoutManager
+                (getApplicationContext(), spanCount);
 
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new GridLayoutManager
-                (getApplicationContext(), spanCount));
+        mRecyclerView.setLayoutManager(mGridLayoutManager);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
