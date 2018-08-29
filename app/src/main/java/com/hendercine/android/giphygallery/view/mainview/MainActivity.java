@@ -6,7 +6,7 @@
  * Last modified 8/22/18 8:55 PM
  */
 
-package com.hendercine.android.gifavorites.view.mainview;
+package com.hendercine.android.giphygallery.view.mainview;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,13 +28,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
-import com.hendercine.android.gifavorites.BuildConfig;
-import com.hendercine.android.gifavorites.R;
-import com.hendercine.android.gifavorites.data.ApiResultReceiver;
-import com.hendercine.android.gifavorites.data.GifClient;
-import com.hendercine.android.gifavorites.model.Gif;
-import com.hendercine.android.gifavorites.model.GiphyObject;
-import com.hendercine.android.gifavorites.view.base.BaseActivity;
+import com.hendercine.android.giphygallery.BuildConfig;
+import com.hendercine.android.giphygallery.R;
+import com.hendercine.android.giphygallery.data.ApiResultReceiver;
+import com.hendercine.android.giphygallery.data.GifClient;
+import com.hendercine.android.giphygallery.model.Gif;
+import com.hendercine.android.giphygallery.model.GiphyObject;
+import com.hendercine.android.giphygallery.view.base.BaseActivity;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
 import java.util.concurrent.ExecutorService;
@@ -51,7 +51,7 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 
-import static com.hendercine.android.gifavorites.data.ApiResultReceiver.ResultListener;
+import static com.hendercine.android.giphygallery.data.ApiResultReceiver.ResultListener;
 
 /**
  * Gifavorites created by artemis on 8/22/18.

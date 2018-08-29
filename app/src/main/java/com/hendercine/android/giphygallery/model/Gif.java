@@ -6,7 +6,7 @@
  * Last modified 8/23/18 1:44 PM
  */
 
-package com.hendercine.android.gifavorites.model;
+package com.hendercine.android.giphygallery.model;
 
 /**
  * Gifavorites created by artemis on 8/23/18.

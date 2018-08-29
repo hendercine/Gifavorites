@@ -6,7 +6,7 @@
  * Last modified 8/17/18 9:20 PM
  */
 
-package com.hendercine.android.gifavorites.view.base;
+package com.hendercine.android.giphygallery.view.base;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -17,7 +17,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.hendercine.android.gifavorites.BuildConfig;
+import com.hendercine.android.giphygallery.BuildConfig;
 
 import timber.log.Timber;
 

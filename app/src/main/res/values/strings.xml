@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gifavorites</string>
+    <string name="app_name">Giphy Gallery</string>
     <string name="menu_search_title">Search</string>
     <string name="giphy_image_desc_ph">Giphy Image</string>
     <string name="giphy_title_ph">Giphy Title</string>

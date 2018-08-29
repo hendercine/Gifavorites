@@ -1,4 +1,4 @@
-package com.hendercine.android.gifavorites
+package com.hendercine.android.giphygallery
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
