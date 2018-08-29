@@ -82,7 +82,7 @@ dependencies {
     // RxBinding
     implementation 'com.jakewharton.rxbinding:rxbinding:1.0.1'
 
-     // RxNetwork
+    // RxNetwork
     implementation 'io.andref:Rx.Network:1.0.1'
 
     // Timber

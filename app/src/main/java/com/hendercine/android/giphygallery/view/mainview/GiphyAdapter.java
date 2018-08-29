@@ -52,7 +52,7 @@ public class GiphyAdapter extends RecyclerView.Adapter<GiphyAdapter.GiphyViewHol
     public void onBindViewHolder(@NonNull GiphyViewHolder holder, int position) {
         if (mResponse != null) {
             final Gif gif = mResponse.getImagesData(position);
-
+            
             Glide.with(mContext)
                     .load(gif.getUrl())
                     .apply(new RequestOptions()

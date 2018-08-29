@@ -353,7 +353,7 @@ public class MainActivity extends BaseActivity implements ResultListener {
     protected void cache(GiphyObject response) {
         for (Gif gif : response.getGifs()) {
             Glide.with(getContext())
-                    .load(gif.images.fixed_width.url)
+                    .load(gif.images.fixed_width_downsampled.url)
                     .apply(new RequestOptions()
                             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                             .centerCrop())
