@@ -9,9 +9,7 @@
 package com.hendercine.android.giphygallery.data;
 
 import android.support.annotation.NonNull;
-
 import java.io.IOException;
-
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
