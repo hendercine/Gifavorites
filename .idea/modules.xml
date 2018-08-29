@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Gifavorites.iml" filepath="$PROJECT_DIR$/Gifavorites.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GiphyGallery.iml" filepath="$PROJECT_DIR$/GiphyGallery.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

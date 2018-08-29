@@ -6,7 +6,7 @@
  * Last modified 8/28/18 2:28 PM
  */
 
-package com.hendercine.android.gifavorites.data;
+package com.hendercine.android.giphygallery.data;
 
 import android.os.Bundle;
 import android.os.Handler;

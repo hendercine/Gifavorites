@@ -6,7 +6,7 @@
  * Last modified 8/22/18 8:55 PM
  */
 
-package com.hendercine.android.gifavorites.model;
+package com.hendercine.android.giphygallery.model;
 
 import com.google.gson.annotations.SerializedName;
 

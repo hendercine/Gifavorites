@@ -6,10 +6,10 @@
  * Last modified 8/18/18 7:38 PM
  */
 
-package com.hendercine.android.gifavorites.data;
+package com.hendercine.android.giphygallery.data;
 
-import com.hendercine.android.gifavorites.BuildConfig;
-import com.hendercine.android.gifavorites.model.GiphyObject;
+import com.hendercine.android.giphygallery.BuildConfig;
+import com.hendercine.android.giphygallery.model.GiphyObject;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

@@ -6,7 +6,7 @@
  * Last modified 8/27/18 10:23 AM
  */
 
-package com.hendercine.android.gifavorites.data;
+package com.hendercine.android.giphygallery.data;
 
 import java.io.IOException;
 

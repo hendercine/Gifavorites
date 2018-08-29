@@ -6,7 +6,7 @@
  * Last modified 8/23/18 9:43 PM
  */
 
-package com.hendercine.android.gifavorites.view.mainview;
+package com.hendercine.android.giphygallery.view.mainview;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
-import com.hendercine.android.gifavorites.R;
-import com.hendercine.android.gifavorites.model.Gif;
-import com.hendercine.android.gifavorites.model.GiphyObject;
+import com.hendercine.android.giphygallery.R;
+import com.hendercine.android.giphygallery.model.Gif;
+import com.hendercine.android.giphygallery.model.GiphyObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

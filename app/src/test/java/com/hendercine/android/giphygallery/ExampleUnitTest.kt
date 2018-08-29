@@ -1,4 +1,4 @@
-package com.hendercine.android.gifavorites
+package com.hendercine.android.giphygallery
 
 import org.junit.Test
 

@@ -6,9 +6,9 @@
  * Last modified 8/18/18 7:41 PM
  */
 
-package com.hendercine.android.gifavorites.data;
+package com.hendercine.android.giphygallery.data;
 
-import com.hendercine.android.gifavorites.model.GiphyObject;
+import com.hendercine.android.giphygallery.model.GiphyObject;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;

@@ -6,7 +6,7 @@
  * Last modified 8/26/18 9:27 PM
  */
 
-package com.hendercine.android.gifavorites.view.mainview;
+package com.hendercine.android.giphygallery.view.mainview;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
