@@ -20,6 +20,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -136,7 +137,7 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
         Timber.d("In onCreate");
 
         mCacheExecutor = Executors.newFixedThreadPool(1);
-        mGifClient = new GifClient(getIntent().getStringExtra(API_KEY));
+        mGifClient = new GifClient();
         mConnectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         boolean isTablet = getResources().getBoolean(R.bool.isTablet);
 
@@ -178,6 +179,11 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
             @Override
             public void onClick(View v) {
                 mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+                mEditText.requestFocus();
+                InputMethodManager mgr = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (mgr != null) {
+                    mgr.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+                }
             }
         });
         mRecyclerView.setOnClickListener(new View.OnClickListener() {
@@ -278,8 +284,6 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
         if (mEditTextSubscription != null) {
             mEditTextSubscription.unsubscribe();
         }
-
-        mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         mEditTextSubscription = RxTextView.textChanges(mEditText)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<CharSequence>() {
