@@ -185,12 +185,13 @@ public class MainActivity extends BaseActivity implements ResultListener {
         int spacingInPixels = 16;
         mRecyclerView.addItemDecoration(new GridSpacingItemDecoration
                 (spanCount, spacingInPixels, true));
-//        mRecyclerView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Timber.d("Show the gif with a sharedElement transition");
-//            }
-//        });
+        mRecyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: start DetailActivity with SharedElement transition
+                // for v21 and an AnimationSet for v19
+            }
+        });
 
         mEditText.setOnClickListener(new View.OnClickListener() {
             @Override
