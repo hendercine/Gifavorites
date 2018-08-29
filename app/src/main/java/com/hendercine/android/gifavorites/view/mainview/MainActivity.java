@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.GridLayoutManager;
@@ -126,7 +127,6 @@ public class MainActivity extends BaseActivity implements ResultListener {
         }
     };
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -175,7 +175,7 @@ public class MainActivity extends BaseActivity implements ResultListener {
                 }
             }
         });
-        int spacingInPixels = 50;
+        int spacingInPixels = 16;
         mRecyclerView.addItemDecoration(new GridSpacingItemDecoration
                 (spanCount, spacingInPixels, true));
         mRecyclerView.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +221,12 @@ public class MainActivity extends BaseActivity implements ResultListener {
                             }
                         }));
         dismissKeyboard();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
     }
 
     @Override
