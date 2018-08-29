@@ -4,7 +4,7 @@
   ~ Copyright (c) Hendercine Productions and James Henderson 2018.
   ~ All rights reserved.
   ~
-  ~ Last modified 8/29/18 11:49 AM
+  ~ Last modified 8/29/18 12:07 PM
   -->
 
 <android.support.constraint.ConstraintLayout
@@ -20,6 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+        android:transitionName="@string/transition_photo"
         android:contentDescription="@string/giphy_image_desc_ph"
         app:layout_constraintBottom_toTopOf="@+id/detail_text_view"
         app:layout_constraintEnd_toEndOf="parent"

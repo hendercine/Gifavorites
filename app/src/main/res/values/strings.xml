@@ -8,4 +8,5 @@
     <string name="search_hint">Search Giphy</string>
     <string name="done_text">DONE</string>
     <string name="search_btn_text">SEARCH</string>
+    <string name="transition_photo">Transition Photo</string>
 </resources>
