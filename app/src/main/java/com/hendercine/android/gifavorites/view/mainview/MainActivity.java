@@ -54,7 +54,7 @@ import static com.hendercine.android.gifavorites.data.ApiResultReceiver.ResultLi
 /**
  * Gifavorites created by artemis on 8/22/18.
  */
-public class MainActivity extends BaseActivity implements ResultListener, GiphyAdapter.Listener{
+public class MainActivity extends BaseActivity implements ResultListener {
 
     public final static String GIPHY_URL = "giphy_url";
     public final static String API_KEY = BuildConfig.ApiKey;
@@ -151,7 +151,6 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
         }
 
         mAdapter = new GiphyAdapter(getApplicationContext());
-        mAdapter.setListener(this);
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager
@@ -239,14 +238,6 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
         if (mCompositeSubscription != null && !mCompositeSubscription.isUnsubscribed()) {
             mCompositeSubscription.unsubscribe();
         }
-    }
-
-    @Override
-    public void onSelected(String url) {
-        Intent intent = new Intent();
-        intent.putExtra(GIPHY_URL, url);
-        setResult(RESULT_OK, intent);
-        finish();
     }
 
     @Override

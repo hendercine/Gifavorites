@@ -33,13 +33,8 @@ import butterknife.ButterKnife;
 public class GiphyAdapter extends RecyclerView.Adapter<GiphyAdapter.GiphyViewHolder>{
 
     LayoutInflater mInflater;
-    Listener mListener;
     GiphyObject mResponse;
     private Context mContext;
-
-    interface Listener {
-        void onSelected(String url);
-    }
 
     GiphyAdapter(@NonNull Context context) {
         this.mInflater = LayoutInflater.from(context);
@@ -84,10 +79,6 @@ public class GiphyAdapter extends RecyclerView.Adapter<GiphyAdapter.GiphyViewHol
 
     void appendResponse(GiphyObject response) {
         this.mResponse.appendImagesData(response.getGifs());
-    }
-
-    void setListener(Listener listener) {
-        this.mListener = listener;
     }
 
     class GiphyViewHolder extends RecyclerView.ViewHolder {
