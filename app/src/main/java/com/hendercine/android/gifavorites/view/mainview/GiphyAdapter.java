@@ -10,20 +10,27 @@ package com.hendercine.android.gifavorites.view.mainview;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.hendercine.android.gifavorites.R;
 import com.hendercine.android.gifavorites.model.Gif;
 import com.hendercine.android.gifavorites.model.GiphyObject;
 
-import static android.support.v7.widget.RecyclerView.ViewHolder;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Gifavorites created by artemis on 8/23/18.
  */
-public class GiphyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class GiphyAdapter extends RecyclerView.Adapter<GiphyAdapter.GiphyViewHolder>{
 
     LayoutInflater mInflater;
     Listener mListener;
@@ -40,20 +47,26 @@ public class GiphyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int
+    public GiphyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int
             viewType) {
-        return new GiphyView(mInflater.inflate(R.layout.list_item_main,
-                parent, false
-        ));
+        View view = mInflater.inflate(R.layout.list_item_main, parent, false);
+        return new GiphyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GiphyViewHolder holder, int position) {
         if (mResponse != null) {
             final Gif gif = mResponse.getImagesData(position);
 
-            final GiphyView view = (GiphyView) holder;
-            view.loadGif(gif);
+            Glide.with(mContext)
+                    .load(gif.getUrl())
+                    .apply(new RequestOptions()
+                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                            .placeholder(R.drawable.ic_placeholder)
+                            .error(R.drawable.ic_error)
+                            .centerCrop())
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(holder.mImageView);
         }
     }
 
@@ -77,4 +90,15 @@ public class GiphyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         this.mListener = listener;
     }
 
+    class GiphyViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.main_grid_item_img)
+        AppCompatImageView mImageView;
+
+        GiphyViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            mContext = itemView.getContext();
+        }
+    }
 }

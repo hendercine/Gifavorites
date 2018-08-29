@@ -140,11 +140,14 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
         mGifClient = new GifClient();
         mConnectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         boolean isTablet = getResources().getBoolean(R.bool.isTablet);
-
-        mRecyclerView = mHandHeldGridCards;
+        int spanCount;
 
         if (isTablet) {
             mRecyclerView = mTabletGridCards;
+            spanCount = 3;
+        } else {
+            mRecyclerView = mHandHeldGridCards;
+            spanCount = 2;
         }
 
         mAdapter = new GiphyAdapter(getApplicationContext());
@@ -152,7 +155,7 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager
-                (getApplicationContext(), 3));
+                (getApplicationContext(), spanCount));
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -161,7 +164,6 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
                 if (loadMore) {
                     return;
                 }
-
                 GridLayoutManager layoutManager = (GridLayoutManager) mRecyclerView
                         .getLayoutManager();
                 int visibleItems = layoutManager.getChildCount();
@@ -174,6 +176,15 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
                 }
             }
         });
+        int spacingInPixels = 50;
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration
+                (spanCount, spacingInPixels, true));
+        mRecyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismissKeyboard();
+            }
+        });
 
         mEditText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,12 +195,6 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
                 if (mgr != null) {
                     mgr.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
                 }
-            }
-        });
-        mRecyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismissKeyboard();
             }
         });
 
@@ -345,7 +350,7 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
     protected void cache(GiphyObject response) {
         for (Gif gif : response.getGifs()) {
             Glide.with(getContext())
-                    .load(gif.images.fixed_width_small.url)
+                    .load(gif.images.fixed_width.url)
                     .apply(new RequestOptions()
                             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                             .centerCrop())
