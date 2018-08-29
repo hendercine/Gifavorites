@@ -23,18 +23,27 @@ public class Gif {
 
     public static class GiphyImage {
 
-        public ImageContainer fixed_width;
-        public ImageContainer fixed_width_small;
+        public ImageContainer fixed_width_downsampled;
+        public ImageContainer downsized_large;
     }
 
     public GiphyImage images;
+    public String mTitle;
 
-    public String getUrl() {
-        return images.fixed_width.url;
+    public String getTitle() {
+        return mTitle;
     }
 
-    public String getUrlSmall() {
-        return images.fixed_width_small.url;
+    public void setTitle(String title) {
+        this.mTitle = title;
+    }
+
+    public String getUrl() {
+        return images.fixed_width_downsampled.url;
+    }
+
+    public String getUrlLarge() {
+        return images.downsized_large.url;
     }
 
 }
