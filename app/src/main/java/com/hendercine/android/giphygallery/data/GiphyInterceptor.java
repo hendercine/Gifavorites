@@ -8,6 +8,8 @@
 
 package com.hendercine.android.giphygallery.data;
 
+import android.support.annotation.NonNull;
+
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
@@ -21,12 +23,12 @@ class GiphyInterceptor implements Interceptor {
 
     private String mApiKey;
 
-    public GiphyInterceptor(String apiKey) {
+    GiphyInterceptor(String apiKey) {
         this.mApiKey = apiKey;
     }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
 
         // Parse request
         Request original = chain.request();

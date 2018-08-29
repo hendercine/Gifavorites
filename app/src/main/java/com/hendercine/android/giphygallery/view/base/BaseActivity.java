@@ -29,16 +29,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(getContentResource());
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
     }
-
-//    @LayoutRes
-//    protected abstract int getContentResource();
-//
-//    protected abstract void init(@Nullable Bundle state);
 
     public void showSnackBar(int resId) {
         Snackbar.make(

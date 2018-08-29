@@ -32,8 +32,8 @@ import butterknife.ButterKnife;
  */
 public class GiphyAdapter extends RecyclerView.Adapter<GiphyAdapter.GiphyViewHolder>{
 
-    LayoutInflater mInflater;
-    GiphyObject mResponse;
+    private LayoutInflater mInflater;
+    private GiphyObject mResponse;
     private Context mContext;
 
     GiphyAdapter(@NonNull Context context) {
@@ -52,7 +52,7 @@ public class GiphyAdapter extends RecyclerView.Adapter<GiphyAdapter.GiphyViewHol
     public void onBindViewHolder(@NonNull GiphyViewHolder holder, int position) {
         if (mResponse != null) {
             final Gif gif = mResponse.getImagesData(position);
-            
+
             Glide.with(mContext)
                     .load(gif.getUrl())
                     .apply(new RequestOptions()
