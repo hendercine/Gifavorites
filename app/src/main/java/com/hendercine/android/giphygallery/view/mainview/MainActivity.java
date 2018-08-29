@@ -64,6 +64,7 @@ public class MainActivity extends BaseActivity implements ResultListener {
     public final static int PAGE_COUNT = 25;
     private static final String REC = "rec";
 
+    private String mQuery;
     public ResultListener mResultListener;
 
     @Nullable
@@ -184,12 +185,12 @@ public class MainActivity extends BaseActivity implements ResultListener {
         int spacingInPixels = 16;
         mRecyclerView.addItemDecoration(new GridSpacingItemDecoration
                 (spanCount, spacingInPixels, true));
-        mRecyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismissKeyboard();
-            }
-        });
+//        mRecyclerView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Timber.d("Show the gif with a sharedElement transition");
+//            }
+//        });
 
         mEditText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,9 +204,12 @@ public class MainActivity extends BaseActivity implements ResultListener {
             }
         });
 
-        setUpEditText();
-        dismissKeyboard();
-        getTrending(offset);
+        if (savedInstanceState != null) {
+            mQuery = savedInstanceState.getString("query");
+            setUpEditText();
+        } else {
+            setUpEditText();
+        }
     }
 
     @Override
@@ -226,13 +230,14 @@ public class MainActivity extends BaseActivity implements ResultListener {
                                 }
                             }
                         }));
-        dismissKeyboard();
+            dismissKeyboard();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-
+        mQuery = mEditText.getText().toString();
+        outState.putString("query", mQuery);
     }
 
     @Override
@@ -246,6 +251,12 @@ public class MainActivity extends BaseActivity implements ResultListener {
         super.onDestroy();
         if (mSearchSubscription != null && !mSearchSubscription.isUnsubscribed()) {
             mSearchSubscription.unsubscribe();
+        }
+        if (mEditTextSubscription != null && !mEditTextSubscription.isUnsubscribed()) {
+            mEditTextSubscription.unsubscribe();
+        }
+        if (mTrendingSubscription != null && !mTrendingSubscription.isUnsubscribed()) {
+            mTrendingSubscription.unsubscribe();
         }
         if (mCompositeSubscription != null && !mCompositeSubscription.isUnsubscribed()) {
             mCompositeSubscription.unsubscribe();
@@ -297,15 +308,15 @@ public class MainActivity extends BaseActivity implements ResultListener {
                 .subscribe(new Action1<CharSequence>() {
                     @Override
                     public void call(CharSequence charSequence) {
+                        charSequence = mEditText.getText();
+                        mQuery = charSequence.toString();
 
-                        String query = charSequence.toString();
-
-                        if (query.equals("")) {
+                        if (mQuery.equals("")) {
                             mRecyclerView.smoothScrollToPosition(0);
                             getTrending(0);
                         } else {
                             mRecyclerView.smoothScrollToPosition(0);
-                            getSearch(query, 0);
+                            getSearch(mQuery, 0);
                         }
                     }
                 });
