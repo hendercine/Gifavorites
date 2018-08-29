@@ -19,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -72,6 +73,9 @@ public class MainActivity extends BaseActivity implements ResultListener {
     @Nullable
     @BindView(R.id.tablet_grid_recycler)
     RecyclerView mTabletGridCards;
+
+    @BindView(R.id.toolbar_main)
+    Toolbar mToolbar;
 
     @BindView(R.id.search_field_view)
     AppCompatEditText mEditText;
@@ -135,6 +139,8 @@ public class MainActivity extends BaseActivity implements ResultListener {
         ButterKnife.bind(this);
         Timber.tag("LifeCycles");
         Timber.d("In onCreate");
+
+        mToolbar.setTitle(R.string.app_name);
 
         mCacheExecutor = Executors.newFixedThreadPool(1);
         mGifClient = new GifClient();
