@@ -18,9 +18,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -74,9 +73,6 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
 
     @BindView(R.id.search_field_view)
     AppCompatEditText mEditText;
-
-    @BindView(R.id.search_btn)
-    Button mSearchButton;
 
     RecyclerView mRecyclerView;
 
@@ -177,6 +173,13 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
                 }
             }
         });
+
+        mEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+            }
+        });
         mRecyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,14 +187,8 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
             }
         });
 
-        mSearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start(MainActivity.this, mResultListener, API_KEY);
-            }
-        });
-
         setUpEditText();
+        dismissKeyboard();
         getTrending(offset);
     }
 
@@ -282,6 +279,7 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
             mEditTextSubscription.unsubscribe();
         }
 
+        mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         mEditTextSubscription = RxTextView.textChanges(mEditText)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<CharSequence>() {
@@ -306,8 +304,7 @@ public class MainActivity extends BaseActivity implements ResultListener, GiphyA
     }
 
     private void dismissKeyboard() {
-        InputMethodManager inm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+        mEditText.setInputType(InputType.TYPE_NULL);
     }
 
     private void loadMore() {
