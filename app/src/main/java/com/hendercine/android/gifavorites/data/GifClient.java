@@ -24,7 +24,7 @@ public class GifClient {
     private static final String BASE_URL = "http://api.giphy.com/v1/";
     private static GifApiService mGifApiService;
 
-    public GifClient(String apiKey) {
+    public GifClient() {
         Retrofit retrofit = getRetrofit();
         mGifApiService = retrofit.create(GifApiService.class);
 
