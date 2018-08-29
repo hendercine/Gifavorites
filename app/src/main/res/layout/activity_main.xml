@@ -57,7 +57,7 @@
                 android:ems="10"
                 android:focusable="auto"
                 android:hint="@string/search_hint"
-                android:imeOptions="actionSearch"
+                android:imeOptions="actionDone"
                 android:inputType="text"
                 android:isScrollContainer="false"
                 android:longClickable="true"
