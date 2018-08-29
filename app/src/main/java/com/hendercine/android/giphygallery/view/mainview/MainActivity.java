@@ -8,7 +8,6 @@
 
 package com.hendercine.android.giphygallery.view.mainview;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -59,10 +58,11 @@ import static com.hendercine.android.giphygallery.data.ApiResultReceiver.ResultL
 public class MainActivity extends BaseActivity implements ResultListener {
 
     public final static String GIPHY_URL = "giphy_url";
+    private static final String REC = "rec";
     public final static String API_KEY = BuildConfig.ApiKey;
     public final static int REQUEST_CODE = 1001;
     public final static int PAGE_COUNT = 25;
-    private static final String REC = "rec";
+    private static final String QUERY_KEY = "query";
 
     private String mQuery;
     public ResultListener mResultListener;
@@ -206,7 +206,7 @@ public class MainActivity extends BaseActivity implements ResultListener {
         });
 
         if (savedInstanceState != null) {
-            mQuery = savedInstanceState.getString("query");
+            mQuery = savedInstanceState.getString(QUERY_KEY);
             setUpEditText();
         } else {
             setUpEditText();
@@ -238,7 +238,7 @@ public class MainActivity extends BaseActivity implements ResultListener {
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         mQuery = mEditText.getText().toString();
-        outState.putString("query", mQuery);
+        outState.putString(QUERY_KEY, mQuery);
     }
 
     @Override
@@ -266,12 +266,7 @@ public class MainActivity extends BaseActivity implements ResultListener {
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        start(MainActivity.this, mResultListener, API_KEY);
-    }
-
-    public void start(Activity activity, ResultListener resultListener, String apiKey) {
-        this.mResultListener = resultListener;
-        activity.startActivityForResult(buildIntent(activity, apiKey), REQUEST_CODE);
+    startActivityForResult(buildIntent(MainActivity.this, API_KEY), resultCode);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -323,10 +318,6 @@ public class MainActivity extends BaseActivity implements ResultListener {
                 });
     }
 
-    private Context getContext() {
-        return getApplicationContext();
-    }
-
     private void dismissKeyboard() {
         mEditText.setInputType(InputType.TYPE_NULL);
     }
@@ -364,7 +355,7 @@ public class MainActivity extends BaseActivity implements ResultListener {
 
     protected void cache(GiphyObject response) {
         for (Gif gif : response.getGifs()) {
-            Glide.with(getContext())
+            Glide.with(getApplicationContext())
                     .load(gif.images.fixed_width_downsampled.url)
                     .apply(new RequestOptions()
                             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
